@@ -1,0 +1,27 @@
+// 순간이동식으로 위치를 이동시킴
+transform.position = new Vector3 (10, 0, 0);
+RigidBody.position
+
+// 이동 출발과 끝 지점을 직선으로 연결한 경로를 매우 빠르게 이동한다
+// 중간에 다른 rigidbody가 있을 시 밀어내는 등의 물리처리를 한다
+RigidBody.MovePosition()
+ex ) myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
+ex ) myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(_characterRotationY));
+ex ) RigidBody.velocity = new Vector3 (0,10,0);
+
+//피직스, 레이져
+IsGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
+RaycastHit // 광선을 쏴서 그 정보를 얻어올때 쓰는 자료형
+
+--------------------------URL-------------------------------
+
+// 오브젝트 회전, 이동 함수
+https://mingyu0403.tistory.com/22
+
+// 코루틴 알고리즘 설명
+https://onecoke.tistory.com/entry/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EC%BD%94%EB%A3%A8%ED%8B%B4-Coroutine
+
+--------------------------기타, 용어-------------------------
+파라미터 == 매개변수
+
+--------------------------정리 전 ----------------------------
