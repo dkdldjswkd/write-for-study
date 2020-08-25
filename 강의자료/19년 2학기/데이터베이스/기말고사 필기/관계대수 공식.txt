@@ -1,0 +1,6 @@
+프로젝션L(셀렉션C(R * S))
+바꾸는 공식 ->
+select (L), 
+from (R, S), 
+where (C)
+
