@@ -1,0 +1,142 @@
+아스키
+CDMA
+멀티플랙스
+PSTN
+VOIP
+
+로컬넷을 구성하는 형태 맵 or layout
+데이터를 이동시키는 물리적 형상(physical)과 모습(logical).
+버스 링 스타(매쉬는 스타와 비슷하나 감점) wireless
+
+CSMACD
+
+	CS 캐리어센스 - 데이터 전송시키기전에 데이터가 있는지 감지
+	MA 멀리플 억세스 - 이더넷망에 연결된모든 디바이스에 접근
+	CD 콜리젼 디텍션 - 충돌 감지, 일정시간후 재전송
+
+NOS의 역할
+	네트웤상에 서버와 클라 사이의 인터페이스역할을 하는 운영체제
+	
+	유닉스 리눅스 윈도우 
+
+Ipv4 //	 Ipv6
+가용주소 갯수가 더 많다
+보안성
+class 사용 X -> 더 유연하게 사용 가능.
+subnet을 이용 X
+
+패킷 
+회선을 독점적으로 사용 X
+데이터를 나눠 이동시킨다.
+순서를 조정해줘야한다. (목적지에서)
+	회선교환망에서 콜셋업타임 필요 X
+	회선교환망 낭비 없음
+	네트워크효율이 좋다.
+
+===============================================================================
+이메일 보낼 때
+	FYI (For Your Information) 그냥 니 받으셈. 답장안해두댐. 공지사항
+===============================================================================
+
+The Internet
+	ARPANET
+	아르파를 고안해서 만든게 TCP
+	오늘날의 TCP/IP와는 다르게 그냥 조그마한 것이였다.
+	
+	94-95년 MS에서 TCP/IP를 지원하고있었다. 
+	이 때 민간업체에서 TCP/IP를 지원하기 시작했다.
+
+
+	
+	
+	
+	DNS
+	(Domain name - kpu.ac.kr)
+	IP주소를 어떻게외움..	
+	Domain server를 분산처리함.
+	Domain name server가 name을 못찾으면 본인과 연결된 도메인을 찾아서
+	해당 도메인에 있는지 찾아봄. 찾을때 까지 반복해줌.
+
+7개의 도메인
+.com - company
+.edu - 교육
+.gov - 공공기관
+.int - internaltional
+.mil - 국방부
+.net - 네트워크회사들
+.org - 비영리기관
+.arpa - 
+(지금 인터넷의 뿌리는 ARPANET)
+
+.aero - 항공사
+
+
+Internet Protocol
+ARP	- mac addr -> IP addr
+DHCP	- 유동아이피
+DNS
+iSCSI(스커지) - Storage Arounet(?), 스토리지 서버에 백업을고려해서 네트워크를고려
+LDAP	-DB보다 조금 가벼운 버전.
+HTTP	-WEB
+
+
+Internet Application
+File Transfer - FTP and HHTTP
+Remote Computing
+Streaming media
+Email
+
+
+
+THE FUTURE OF THE INTERNET
+vBNS
+	MCI가 시작했는데 망해버림..
+	MCI -> MCI WorldCom (새우가 고래[MCI]를 먹은 격. 분식회계로 또망함)
+
+Internet2
+	Abliene Project - 테스트서버? 같은거 같다.
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+ 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+

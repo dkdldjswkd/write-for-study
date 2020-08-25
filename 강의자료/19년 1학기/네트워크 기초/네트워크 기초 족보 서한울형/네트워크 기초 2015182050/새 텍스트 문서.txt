@@ -1,0 +1,32 @@
+네트워크 조사
+
+TCP
+
+
+http://www.ktword.co.kr/abbr_view.php?m_temp1=347
+
+http://www.ktword.co.kr/abbr_view.php?id=525&m_temp1=2720&nav=2
+
+차이
+http://hahahoho5915.tistory.com/13
+
+UDP
+
+IP
+http://ddooooki.tistory.com/17
+패킷
+
+소켓 인터페이스
+
+http://jkkang.net/unix/netprg/chap2/net2_1.html
+
+
+http://www.ktword.co.kr/abbr_view.php?m_temp1=280&m_search=%EC%82%AC
+
+
+ARP
+
+RARP
+
+ICMP
+

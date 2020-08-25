@@ -1,0 +1,133 @@
+
+큰틀
+
+1. 디지털 방송, 케이블 방송, 위성 방송, IPTV 각각 기술적 특징
+	차이점들
+
+2. 4가지가 다 거기서 거기  -> 경쟁에서 살아남으려면 컨텐츠 !!
+
+	게임 개발자로서 어떤 컨텐츠를 개발해야하는가
+
+	게임방송은 솔직히 TV보단 모바일, 인터넷으로 봄
+
+	TV로만 할 수 있는 컨텐츠가 필요
+
+	1. VR 게임, ...
+
+	2. 연세가 많으신 분들을 위한 자막 서비스 --> 복잡한 기능 사용이 힘듬 (리모콘)
+
+	3. 케이블은 지역채널에 대폭 투자해 지역가입자의 충성도를 높이거나, 지역 밀착 마케팅을 하는 수밖에 없다.
+	   약정기간에 따라 2년마다 해지되는 사업자가 아니라 ‘평생 가입자’를 확보하는 게 우선이라는 이야기다.
+           이런 점에서 ‘현금지급’ 마케팅을 버리고 ‘우리동네 케이블’ 평생 약정 프로모션이 낫다.
+
+	
+	http://biz.chosun.com/site/data/html_dir/2016/12/26/2016122601161.html
+
+	http://www.businesspost.co.kr/news/articleView.html?idxno=10814
+
+디지털 방송
+
+디지털방송(-放 送, digital broadcasting)이란 프로그램의 제작부터 
+편집, 전송, 수신, 재생 등 방송의 전 과정을 디지털방식으로 처리하는 방송시스템을 말한다. 
+제작과정에서 사용되는 비디오카메라 , VTR등의 기기부터 마지막 수신과정에서의 방송신호가 디지털 방식이여야 하고
+ 시청을 하기 위한 TV도 디지털방송 특성에 맞게 구성된 디지털 TV이거나,
+ 각 방송국으로부터 송신되는 방송의 신호를 변환하여 각 기기로 전달하는 중간 수신장치 셋톱박스가 필요하다.
+
+특징 :
+고품질, 고음질 : 기존 아날로그 방송은 방송신호가 다른 신호와 섞여서 Ghost현상 등이 발생했지만
+ 		 0과1만을 인식하는 디지털방송 방식은 다른 신호와 섞여도 0과1로만 인식하기 때문에
+		 방해를 받지 않고 결과적으로 화질이나 음질이 선명해진다.
+
+압축 기술의 발달: 6Mbps의 대역폭에 한 개의 프로그램 전송만 가능했던 아날로그 방송과 달리
+		  디지털 방송은 고화질로 동시에 많은 양의 데이터 압축이 가능하여 동일한 대역폭에서
+		  여러개의 프로그램을 보낼 수 있으므로 한 채널에 3~5개의 프로그램을 방송할 수 있다.
+
+양방향 서비스 : 텔레비전으로는 방송 청취만 가능하다는 고정 관념을 깨고 인터넷, 쇼핑, 게임 등
+		다양한 서비스를 즐기면서 쌍방향 커뮤니케이션이 이루어진다. 
+		시청자는 방송을 보는 동시에 TV를 통해 원하는 서비스를 선택하고 사용하게 된다.
+		이로써 더이상 TV 시청만 하는 수동적인 시청자가 아닌 능동적인 시청자의 개념이 생겨나게 된다.
+
+
+방송 표준 
+
+DVB 계열 ( 유럽 ) :
+
+DVB(디지털 비디오 방송, Digital Video Broadcasting)이란 국제적으로 승인된 디지털 TV를 위한 공개 표준 규격이다.
+우리나라의 Sky Life는 DVB 방식을 사용 
+계열 뒤의 영어에 다라 위성, 지상파 , 케이블 , 휴대용이 나뉜다.
+
+
+ATSC ( 한국, 북미 )
+ATSC(Advanced Television Systems Committee)는 미국의 디지털 텔레비전 방송 표준을 개발하는 위원회, 혹은 그 표준을 말한다.
+지상파, 케이블 둘다 사용하는 표준이다.
+
+
+ATSC
+기존의 NTSC방식과 공존이 가능하다.
+지상방송용8VSB , 유선방송용16VSB변조방식 채용
+주로 지상파 , 유선방송 표준으로 자리매김
+DVB에 비해 멀티 패스나 잡음에 상대적으로 취약하고 SFN 구성이 불가능하여 
+각 중계소마다 다른 주파수를 사용해야 한다는 문제점이 존재한다.
+
+DVB
+PAL등 기존의 방식보다는 DTV고유의 부가기능에 초점
+COFDM, QPSK, QAM등의 변조 방식 사용
+주로 디지털 위성방송의 표준으로 자리매김 
+DVB는 전파 변조 구조가 ATSC에 비해 복잡하고 HDTV 구성이 비교적 어렵다는 단점이 존재한다. 
+
+
+
+디지털 안에 지상파가 포함되는거
+
+지상파
+
+
+
+
+
+디지털방송
+http://blog.daum.net/hellopolicy/6978674
+
+https://ko.wikipedia.org/wiki/%EB%94%94%EC%A7%80%ED%84%B8_%EB%B0%A9%EC%86%A1
+
+https://ko.wikipedia.org/wiki/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%EC%9D%98_%EC%A7%80%EC%83%81%ED%8C%8C_%EB%94%94%EC%A7%80%ED%84%B8_%ED%85%94%EB%A0%88%EB%B9%84%EC%A0%84_%EB%B0%A9%EC%86%A1
+
+
+
+
+
+지상파
+
+http://uhdkorea.org/?page_id=31083
+
+http://tech.kobeta.com/%EC%A7%80%EC%83%81%ED%8C%8C-uhd-%EB%B0%A9%EC%86%A1%ED%91%9C%EC%A4%80%EB%B0%A9%EC%8B%9D-%EC%84%A0%EC%A0%95%EA%B3%BC-%EA%B4%80%EB%A0%A8-%EC%9D%B4%EC%8A%88/
+이건 중요 UHD 표준에 대한 발표 자료 
+
+
+
+케이블
+
+https://www.dlive.kr/front/product/product/CableAction.do?method=view
+
+http://www.kcta.or.kr/kcta_new/board/ArticleList.do?H_MENU_CD=100202&L_MENU_CD=100202&SITE_ID=KCTA&MENUON=Y&BOARD_ID=33
+
+http://www.itooza.com/common/iview.php?no=0000000000000008992
+
+
+
+위성방송
+
+https://ko.wikipedia.org/wiki/%EC%9C%84%EC%84%B1%EB%B0%A9%EC%86%A1
+
+
+
+컨텐츠
+
+http://it.donga.com/9674/
+
+http://www.fnnews.com/news/201605291711025950
+http://it.donga.com/20490/
+http://m.ohmynews.com/NWS_Web/Mobile/at_pg.aspx?CNTN_CD=A0002103002#cb
+http://www.hankookilbo.com/wdv/086b60e026e64a72bb57f9dea65fbc90
+http://product.olleh.com/wDic/productDetail.do?ItemCode=1163
+http://datainfo.tistory.com/entry/broadntv006

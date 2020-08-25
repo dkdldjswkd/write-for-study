@@ -1,0 +1,348 @@
+// Picture01.cpp : 콘솔 응용 프로그램에 대한 진입점을 정의합니다.
+//
+
+#include "stdafx.h"
+#include <windows.h>
+#include <conio.h>
+#include <stdio.h>
+#include <fmod.h>
+#include <time.h>
+
+typedef enum { INIT, READY, RUNNING, SUCCEESS, FAILED, STOP, RESULT, END } GAME_STATE;
+
+GAME_STATE g_nGameState = RUNNING;
+
+int g_nStage = 0;
+int g_nRow = 0, g_nCol = 0;
+
+typedef enum { CLOSE, OPEN , MATCH } MAL_STATE;
+
+// Note: 
+struct PAN_INFO
+{
+	MAL_STATE sMalState; // 말의 상태	
+	bool bUse; // 판을 사용하고 있는가 없는가?
+	char cMunja; // 출력 문자 
+	int  x, y;
+};
+
+PAN_INFO g_sGamePan[30];
+
+struct CARD_INFO
+{
+	bool bUse;
+	char Munja;
+};
+
+CARD_INFO g_sCardInfo[26]; //알파벳은 26자 
+
+int g_nPushCardIndex = 0;
+int g_nMatchCardIndex[2];
+
+
+
+FMOD_SYSTEM *g_System;
+FMOD_SOUND *g_EffectSound[7];
+FMOD_SOUND *g_LoopSound[2]; // 타이틀과 배경 음악
+FMOD_CHANNEL *g_LoopChannel[2];
+FMOD_CHANNEL *g_TempChannel;
+`                                                                                                                                                                                                                                     
+void SetCursor( int x, int y )
+{
+	COORD CursorPosition = { x, y };
+	SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), CursorPosition ); 
+}
+
+void OpenCard( int x, int y, char cMunja )
+{
+	SetCursor( x, y ); 		printf( "┏━┓");
+	SetCursor( x, y + 1 );	printf( "┃  ┃");
+	SetCursor( x, y + 2 );	printf( "┗━┛");
+	SetCursor( x+2, y + 1 ); printf( "%c", cMunja );
+}
+
+void CloseCard(int x, int y)
+{
+    SetCursor( x, y );		printf( "┏━┓");
+	SetCursor( x, y + 1 );  printf( "┃■┃");
+	SetCursor( x, y + 2 );	printf( "┗━┛");
+}
+
+void InitScreen()
+{	
+	SetCursor( 0, 0 );	
+	printf( "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                     ////////                           ┃\n");
+	printf( "┃                     ┃＼ /┃ ＼│/                     ┃\n");
+	printf( "┃                     ┃··┃┏┳┳┓                   ┃\n");
+	printf( "┃                     ┗┓┏┛┗┓┏┛                   ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                    짝 맞추기 게임                      ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┃                                                        ┃\n");
+	printf( "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");		
+}
+
+void RunningScreen()
+{
+	SetCursor( 0, 0 );
+	printf( "┏━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┃                                                  ┃\n");
+	printf( "┗━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");		
+}
+
+void Sound_Init()
+{
+	FMOD_System_Create(&g_System);
+	FMOD_System_Init( g_System, 32, FMOD_INIT_NORMAL, NULL);
+
+	FMOD_System_CreateSound(g_System, "fail.wav" ,FMOD_HARDWARE , 0, &g_EffectSound[0]);
+	FMOD_System_CreateSound(g_System, "output.wav" ,FMOD_HARDWARE , 0, &g_EffectSound[1]);
+	FMOD_System_CreateSound(g_System, "ready.wav" ,FMOD_HARDWARE , 0, &g_EffectSound[2]);
+	FMOD_System_CreateSound(g_System, "strike.wav" ,FMOD_HARDWARE , 0, &g_EffectSound[3]);
+	FMOD_System_CreateSound(g_System, "success.wav" ,FMOD_HARDWARE , 0, &g_EffectSound[4]);
+	FMOD_System_CreateSound(g_System, "WHOOSH1.WAV" ,FMOD_HARDWARE , 0, &g_EffectSound[5]);
+	FMOD_System_CreateSound(g_System, "ubs.WAV" ,FMOD_HARDWARE , 0, &g_EffectSound[6]);
+
+	FMOD_System_CreateSound(g_System, "bgsound.wav" , FMOD_LOOP_NORMAL , 0, &g_LoopSound[0]);
+	FMOD_System_CreateSound(g_System, "title.wav" ,FMOD_LOOP_NORMAL , 0, &g_LoopSound[1]);
+
+}
+
+void Init()
+{	
+	int nGapY = 0;
+	int PAN_MIN = 0;
+    int PAN_MAX = 29, nCardIndex = 0, nPanIndex;
+	int CARD_MIN = 0, CARD_MAX = 25;
+	int i;
+
+	if(  g_nStage == 0 ) // 1번만 초기화가 되는 부분에 대한 처리 사항
+	{
+		Sound_Init();
+
+		// Note: 카드 초기화
+		for( int m = 0 ; m < 26 ; m++ )
+		{
+			g_sCardInfo[m].Munja = 'A' + m;
+			g_sCardInfo[m].bUse = false;
+		}
+
+		// Note: 판에 놓일 카드의 위치 초기화
+		for( i = 0 ; i < 30 ; i++ )
+		{
+			g_sGamePan[i].x = ( i % 6 ) * 8 + 3;
+			g_sGamePan[i].y = ( i / 6 ) * 4 + 1;
+		}
+
+		g_nStage = 1;
+	}
+
+	// Note: 스테이지마다 초기화를 해 주어야 한다.
+	for( i = 0; i < 30 ; i++ )
+	{
+		g_sGamePan[i].bUse = false;
+		g_sGamePan[i].sMalState = MAL_STATE::CLOSE;
+	}
+	
+	// 알파벳 임의 인덱스 생성의 시작
+	srand( (unsigned)time( NULL ) );
+
+	for( i = 0 ; i < 15 ; i++ )
+	{				
+		//Note: 카드 인덱스를 램덤하게 찾는 경우
+		nCardIndex = (((double) rand() / (double) RAND_MAX) * CARD_MAX + CARD_MIN);
+
+		// 카드 인덱스 중복을 확인하고 인덱스를 결정한다.
+		if( g_sCardInfo[nCardIndex].bUse == true )
+		{
+			//처음부터 다시 찾음
+			for( int n = 0 ; n < 26 ; n++ )
+			{
+				if( g_sCardInfo[n].bUse == false )
+				{							
+					nCardIndex = n;					
+					break;
+				}
+			}
+		}
+
+		//Note: 카드1을 랜덤하게 찾음
+		while( 1 )
+		{
+			nPanIndex = (((double) rand() / (double) RAND_MAX) * PAN_MAX + PAN_MIN);
+			if( g_sGamePan[nPanIndex].bUse == false )
+			{
+				g_sGamePan[nPanIndex].bUse = true;		
+				g_sGamePan[nPanIndex].cMunja = g_sCardInfo[nCardIndex].Munja;
+				g_sCardInfo[nCardIndex].bUse = true; // --> 이게 중요하다.
+				break;
+			}
+		}	
+
+		//Note: 카드2를 랜덤하게 찾음
+		while( 1 )
+		{
+			nPanIndex = (((double) rand() / (double) RAND_MAX) * PAN_MAX + PAN_MIN);
+			if( g_sGamePan[nPanIndex].bUse == false )
+			{
+				g_sGamePan[nPanIndex].bUse = true;		
+				g_sGamePan[nPanIndex].cMunja = g_sCardInfo[nCardIndex].Munja;
+				break;
+			}
+		}		
+	}
+}
+
+void Update()
+{
+	if( g_nPushCardIndex
+	
+
+}
+
+void Render()
+{
+	int i, j, nGap = 0, nGapY = 0;
+
+
+	system( "cls" );
+
+	switch( g_nGameState )
+	{
+	case RUNNING :			
+			RunningScreen();
+
+			for( i = 0 ; i < 30  ; i++ )
+			{				
+					if( g_sGamePan[i].sMalState == MAL_STATE::OPEN )
+						OpenCard( g_sGamePan[i].x, g_sGamePan[i].y, g_sGamePan[i].cMunja );
+					else
+						CloseCard( g_sGamePan[i].x, g_sGamePan[i].y ); 												
+			}
+		
+			SetCursor( g_sGamePan[g_nRow * 6 + g_nCol].x+2, g_sGamePan[g_nRow * 6 + g_nCol].y + 3 );
+			printf( "%s", "↑");			
+			break;
+	}
+}
+
+void Release()
+{
+
+}
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int nKey;
+	static int nPushCardIndex = 0;
+	clock_t OldTime, CurTime;
+
+	CurTime = OldTime = clock();	 
+
+	Init();
+
+	while( true )
+	{
+		if( g_nGameState == END )
+			break;
+
+		if( _kbhit() )
+		{
+			nKey = _getch();
+			if( nKey == 27 )
+				break;		
+			
+			switch( nKey )
+			{
+			case 'j':
+					if( g_nCol - 1 < 0 )
+						g_nCol = 0;
+					else
+						g_nCol--;						
+				break;
+			case 'l':
+					if( g_nCol + 1 > 5 )
+						g_nCol = 5;
+					else
+						g_nCol++;
+				break;
+			case 'i':
+					if( g_nRow - 1 < 0 )
+						g_nRow = 0;
+					else
+						g_nRow--;
+				break;
+			case 'k':
+					if( g_nRow + 1 > 4 )
+						g_nRow = 4;
+					else
+						g_nRow++;
+
+				break;
+			case 'u': // 카드 뒤집기 (오픈)
+				     g_nMatchCardIndex[ g_nPushCardIndex % 2 ] = g_nRow * 6 + g_nCol;
+					 if( g_sGamePan[ g_nRow * 6 + g_nCol ].sMalState ==  
+					 g_nPushCardIndex++;
+
+				break;
+			}
+		}
+
+		Update();
+		Render();
+
+		FMOD_System_Update( g_System );
+
+		//  화면 전환 시간을 줄이기 위해서
+		while( true )
+		{
+			CurTime = clock();
+
+			if( CurTime - OldTime > 30 )
+			{
+				OldTime = CurTime;
+				break;
+			}
+		}				
+	}
+
+	Release();		
+	// GameOverScreen();
+	return 0;
+}
+
