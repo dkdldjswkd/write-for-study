@@ -13,7 +13,16 @@ ex ) RigidBody.velocity = new Vector3 (0,10,0);
 IsGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
 RaycastHit // 광선을 쏴서 그 정보를 얻어올때 쓰는 자료형
 
+//스크립트에서 애니메이션 파라미터 관리
+currentGun.anim.SetBool("Walk", true);
+
+//유니티 씬 로드 하기
+using UnityEngine.SceneManagement; // 인클루드
+SceneManager.LoadScene(sceneName); // 씬 로드해옴
+
 --------------------------URL-------------------------------
+//유니티 에니메이션
+https://blog.naver.com/gold_metal/220490285634
 
 // 오브젝트 회전, 이동 함수
 https://mingyu0403.tistory.com/22
@@ -22,6 +31,17 @@ https://mingyu0403.tistory.com/22
 https://onecoke.tistory.com/entry/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EC%BD%94%EB%A3%A8%ED%8B%B4-Coroutine
 
 --------------------------기타, 용어-------------------------
+// 용어
 파라미터 == 매개변수
 
+//100MB이상 파일 github에 올리기
+#git lfs를 설치해줍니다.
+git lfs install
+git lfs track "*.psd" // 부분에 100MB이상 파일을 써주시면 됩니다.
+git add . // 평소처럼 add, commit, push
+git commit -m "Add design file"
+git push origin master
+
+// 유니티 코딩 스킬
+스크립트마다 static bool 변수로 스크립트를 활성화, 비활성화 시킬 수 있음
 --------------------------정리 전 ----------------------------
