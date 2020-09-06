@@ -30,9 +30,14 @@ Input.GetAxisRaw(string name)
 myRigid.MoveRotation( transform.rotation *  Quaternion.Euler( rotationY ) ); // 매개변수 값은 쿼터니언임.
 transform.rotation // 이것또한 쿼터니언
 
+//게임 오브젝트 addForce, 점프할때 쓰임
+rigidbody.AddForce(Vector3.up * power, ForceMode.Impulse); // (벡터, 포스모드)
+
 //정규화
 Vector3.normalized;
 
+//현재 보고있는 씬을 카메라가 그대로 바라보게 하기
+히어라이키 탭 에서 메인카메라를 선택후 컨트롤 + 쉬프트 + F
 
 --------------------------URL-------------------------------
 //유니티 애니메이션
@@ -47,14 +52,6 @@ https://onecoke.tistory.com/entry/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EC%BD%94%EB%A3%A8
 --------------------------기타, 용어-------------------------
 // 용어
 파라미터 == 매개변수
-
-//100MB이상 파일 github에 올리기
-#git lfs를 설치해줍니다.
-git lfs install
-git lfs track "*.psd" // 부분에 100MB이상 파일을 써주시면 됩니다.
-git add . // 평소처럼 add, commit, push
-git commit -m "Add design file"
-git push origin master
 
 // 유니티 코딩 스킬
 스크립트마다 static bool 변수로 스크립트를 활성화, 비활성화 시킬 수 있음
