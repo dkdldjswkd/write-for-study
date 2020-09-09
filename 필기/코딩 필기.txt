@@ -1,0 +1,6 @@
+//싱글톤 패턴
+https://gmlwjd9405.github.io/2018/07/06/singleton-pattern.html
+https://vaert.tistory.com/139 // c# 싱글톤 패턴
+
+//c# get, set 문법
+https://docs.microsoft.com/ko-kr/dotnet/csharp/programming-guide/classes-and-structs/how-to-declare-and-use-read-write-properties
