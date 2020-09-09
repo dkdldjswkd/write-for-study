@@ -39,6 +39,10 @@ Vector3.normalized;
 //현재 보고있는 씬을 카메라가 그대로 바라보게 하기
 히어라이키 탭 에서 메인카메라를 선택후 컨트롤 + 쉬프트 + F
 
+//에드 컴포넌트
+gameObject.AddComponent ("FoobarScript"); // FoobarScript로 명명된 스크립트를 게임오브젝트에 추가한다
+gameObject.AddComponent .AddComponent<스크립트이름>();
+
 --------------------------URL-------------------------------
 //유니티 애니메이션
 https://blog.naver.com/gold_metal/220490285634
