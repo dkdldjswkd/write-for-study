@@ -1,0 +1,192 @@
+[제곱, 제곱근 구하기]
+#include <math.h> // 선언해야함
+sqrt(a); // 루트 a의 값을 구하는 함수
+pow(a,b); // a의b제곱
+
+[배열 인덱스(주소) 접근]
+string a = “apple”; //일 때
+a[0] == ‘a’, a[1] == ‘p’ // 이렇게 접근 가능 
+a == &a[0]
+a+1 == &a[1]
+
+[랜덤수 생성]
+#include <cstdlib> // 선언하면 rand() 함수 사용가능
+//하지만 시드값을 설정해 주지 않으면 매번 같은 값이 나오게 된다
+srand(a); //함수를 통해 시드 값을 설정해 주어야 한다 (a를 계속 바꿔주어 시드값을 계속 바꾸어 주어야함) 
+//그렇기 때문에
+#include <ctime> //을 선언하고
+srand(time(NULL)); // 함수를 통해 시드 값을 무작위로 바꾸어 준다 (main문 최초에 한번 선언하면 된다.)
+rand() % 100 + 1이면 1~100까지의 수가 생성됨.
+rand() % 100이면 0~99까지의 수가 생성됨.
+
+[2차원 배열 매개변수 사용법]
+void a(int b[][3]); // 이런식으로 가로크기는 지정해 주어야함
+
+[파일 출력]
+#include <fstream> // 선언
+ofstream out(“test.txt”); // 파일 객체 선언 (출력대상), 선언과 동시에 원래의 test.txt 의 내용은 사라짐
+ofstream out(“test.txt”, ios::app); // 이렇게 선언할 시 내용삭제는 되지않고 이어 쓰기가 됨 
+out.open(“test.txt”); // 이렇게도 파일 오픈 가능
+out << “ddd”; // 이렇게 파일 출력
+
+[파일 입력]
+#include <fstream> // 선언
+ifstream in(“test.txt”); // 파일 오픈과 동시에 입력 객체 선언 (입력대상)
+string word;
+getline(in, word); // test.txt에서 한줄을 word에 받아옴
+in >> word; // test.txt에서 한 단어를 word에 받아옴
+in.eof(); // 파일의 끝이면 true를 반환
+while( !in.eof() ) { in>>word; } // test.txt 의 마지막 단어까지 받아옴
+
+[namespace]
+namespace worker{
+     char name[10];
+}
+worker::name 으로 접근해야한다.
+식별자를 구분하는 이름이 중복고 충돌이 일어 날 수 있다.
+하지만 각각의 namespace안에서는 구분이 가능하다.
+
+[using 문]
+using namespace std; 
+// std라는 이름공간안에 있는 식별자들은 ‘std'라는 이름공간을 생략하고 식별자를 사용할 수 있다.
+using std::cout; // std 이름공간 안에 있는 cout은 ‘std'라는 이름공간을 생략하고 사용할 수 있다.
+
+[구조체 포인터]
+struct student;
+student s;
+student* p = &s;
+(*p).name == p->name
+->는 간접멤버연산자로 포인터 p가 가르키는 구조체 변수 멤버를 참조한다는 뜻이다.
+
+[클래스 복사 생성자]
+class A{
+     A(A &tmp){ cout <<“복사생성자 호출” << endl;} // 복사생성자 정의
+};
+A a;
+A b = a; // 복사생성자 호출
+
+[operator 함수]
+b = a;  // b.operator=(a); 
+Rectangle& operator=(const Rectangle& rec) { // 기본적인 operator 함수
+     width = rec.width;
+     height = rec.height;
+     return *this
+}
+Cint& operator++() { //전위오버로딩
+     ++m_value;
+     return *this
+}
+Cint& operator++(int) { //후위오버로딩
+     Cint tmp = *this
+     ++m_value;
+     return tmp;
+}
+2*A의 연산자 오버로딩
+friend A& operator*(int n, A &a); // 클래스 내에 선언
+A& operator*(int n, A &a){return a.v*n;} // 일반함수로 정의
+
+클래스 내부에는 friend로 선언
+istream& operator>>(istream& stream, Rectangle& rec) { // 
+     stream >> rec.width >> rec.height;
+     return stream
+}
+ostream& operator<<(ostream& stream, const Rectangle& rec) {
+     stream << "(w: " << rec.width << ", h: " << rec.height << ") "
+     return stream
+}
+
+[업/다운 캐스팅]
+업캐스팅(부모가 자식을 가리킴)은 자식클래스형을 부모클래스형으로 컴파일러가 자동 형변환
+다운캐스팅(자식이 부모를 가리킴)은 부모형으로 형변환이 필요함 ( p = (자식자료형*)&a; )
+
+[가상함수]
+class A {
+public:
+virtual void show() { cout << "나는부모클래스show함수" << endl; }
+void show2() { cout << "나는부모클래스show2함수" << endl; }
+};
+
+class B : public A {
+public:
+void show() { cout << "나는자식클래스show함수" << endl; }
+void show2() { cout << "나는자식클래스show2함수" << endl; }
+};
+
+int main() {
+A *a;
+B b;
+a = &b;
+a->show(); // 나는자식클래스show함수
+a->show2(); // 나는부모클래스show2함수
+}
+업캐스팅을 했을 시 virtual 키워드가 달려있는 함수에 한에서만 자식클래스의 함수를 호출함
+부모 = 자식; // 이런 방향으로의 대입만 가능함 역방향을 불가함.
+
+[예외처리]
+int a;
+double b;
+try {
+	cout << "아이디 입력(100~999) : ";
+	cin >> a;
+	if (a < 100 || 999 < a)
+		throw a;
+	cout << "성적 입력(0~100) :";
+	cin >> b;
+	if (b < 0 || 100 < b)
+		throw b;
+}//throw에서 던져주는 자료형을 찾아 catch문이 실행됨
+catch (int a) {//throw의 자료형을 매개변수로 받음
+	cout << "예외발생 :" << a << endl;
+	//예외처리문
+}
+catch (double b) {//throw의 자료형을 매개변수로 받음
+	cout << "예외발생 :" << b << endl;
+	//예외처리문
+}
+
+[algorithm의 sort함수]
+#include<algorithm>
+bool compare(Student a, Student b) {
+    return a.getsum() > b.getsum();
+}
+sort(a, a+4, compare);
+
+[템플릿, 제네릭 함수]
+template<class T>
+T bigger(T a, T b){
+	if( a> b){
+		return a;
+	}
+	else
+		return b;
+}
+
+[제네릭 클래스]
+template <class T> // template 선언
+class MyStack{
+	int tos;
+	T data;
+public:
+	MyStack();
+	void Push(T element);
+};
+
+template<class T> // template 선언 및 제네릭 타입 명시
+MyStack<T>::MyStack(){
+	tos = -1;
+}
+
+template<class T>
+void MyStack<T>::push(T element){
+}
+
+용어, 개념 --------------------------------------------------------------------------------------------------------------------------------------------------------
+인스턴스 - 클래스를 사용하기 위해선 메모리에 생성해 주어야 하는데 이렇게 메모리상에 생성된 클래스를 인스턴스라 한다.
+레퍼런스 - 메모리상에 생성된 인스턴스를 가르키는데 사용하는 변수이다.
+ex) 레퍼런스변수.멤버변수; / 레퍼런스변수.메서드();
+
+[객체지향의 개념]
+*캡슐화 : 데이터와 동작을 하나의 클래스로 묶는 것을 말하며, 데이터에 대한 불필요한 접근을 막아 데이터를 보호한다 == 정보은닉
+*상속성 : 하나의 객체가 다른 객체의 특성을 이어받는 성질 (상위 개념의 특징을 하위 개념이 물려받는 것.)
+*다형성 : 하나의 이름으로 여러 동작을 사용할 수 있도록 해주는 것으로 함수나 연산자를 자료에 따라 다르게 동작하도록 하게하는 성질
+*추상화 : 공통의 속성이나 기능을 묶어 이름을 붙이는 것 (클래스를 정의하는 것 == 추상화)
