@@ -43,6 +43,10 @@ gameobject.SetActive(false); // gameobject를 비활성화 시킴, (true는 활�
 
 //게임 오브젝트 생성
 GameObject emptyGameObject = new GameObject("name"); //name이라는 빈 게임 오브젝트를 생성
+Instantiate(GameObject original ,Vector3 position ,Quaternion rotation); // 게임오브젝트 복제?
+
+//게임 오브젝트 제거
+Destroy(GameObject obj ,float time); // time 만큼 지연 후 삭제 (필수 파라메터 x)
 
 //정규화
 Vector3.normalized;
@@ -55,6 +59,11 @@ camera.main; // MainCamera 태그가 붙은 오브젝트를 반환한다
 gameObject.AddComponent ("FoobarScript"); // FoobarScript로 명명된 스크립트를 게임오브젝트에 추가한다
 gameObject.AddComponent .AddComponent<스크립트이름>();
 
+//컴포넌트를 보장(?)하는 코드
+[RequireComponent(typeof(Rigidbody))] // 이 게임오브젝트는 반드시 Rigidbody를 갖고 있어야 한다는 의미이다. 따라서, Rigidbody 컴포넌트를 삭제할 수 없다.
+
+//monobehaviour 내장 함수
+FixedUpdate(); // 모든 물리적 단계 호출, 물리 객체 조정과 같은 정기적 업데이트에 사용(RigidBody)
 --------------------------URL-------------------------------
 //유니티 애니메이션
 https://blog.naver.com/gold_metal/220490285634
