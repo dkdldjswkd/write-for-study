@@ -10,8 +10,13 @@ ex ) myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(_characterRotation
 ex ) RigidBody.velocity = new Vector3 (0,10,0);
 
 //피직스, 레이져
-IsGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
+IsGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f); // 어디서, 방향, 길이 or 어디서, 방향, RaycastHit, 길이
+Ray ray =  Camera.main.ScreenPointToRay(Input.mousePosition); // 메인카메라에서 스크린으로 쏘는 레이저, 마우스 포지션 좌표에
 RaycastHit // 광선을 쏴서 그 정보를 얻어올때 쓰는 자료형
+Plane.Raycast(Ray _r, out float _f) // 특정 평면과 Ray와의 충돌을 체크하여  Ray의 Origin으로부터 충돌지점까지의 거리를 _f에 저장하여 줍니다.
+Vector3 point = ray.GetPoint(rayDistance); // ray의 rayDistance 거리에 충돌한 위치값을 반환함
+ray.origin // ray의 시작부분
+Debug.DrawLine(ray.origin, point, Color.red); // 시작부분, 끝부분, 색 으로 선을 그려줌
 
 //스크립트에서 애니메이션 파라미터 관리
 currentGun.anim.SetBool("Walk", true);
@@ -29,15 +34,22 @@ Input.GetAxisRaw(string name)
 //게임 오브젝트 회전
 myRigid.MoveRotation( transform.rotation *  Quaternion.Euler( rotationY ) ); // 매개변수 값은 쿼터니언임.
 transform.rotation // 이것또한 쿼터니언
-
+transform.LookAt(Vector3); // Vector3 좌표로 오브젝트를 바라보게함
 //게임 오브젝트 addForce, 점프할때 쓰임
 rigidbody.AddForce(Vector3.up * power, ForceMode.Impulse); // (벡터, 포스모드)
+
+//게임 오브젝트 활성화, 비활성화
+gameobject.SetActive(false); // gameobject를 비활성화 시킴, (true는 활성화)
+
+//게임 오브젝트 생성
+GameObject emptyGameObject = new GameObject("name"); //name이라는 빈 게임 오브젝트를 생성
 
 //정규화
 Vector3.normalized;
 
-//현재 보고있는 씬을 카메라가 그대로 바라보게 하기
-히어라이키 탭 에서 메인카메라를 선택후 컨트롤 + 쉬프트 + F
+//카메라
+히어라이키 탭 에서 메인카메라를 선택후 컨트롤 + 쉬프트 + F //현재 보고있는 씬을 카메라가 그대로 바라보게 하기
+camera.main; // MainCamera 태그가 붙은 오브젝트를 반환한다
 
 //에드 컴포넌트
 gameObject.AddComponent ("FoobarScript"); // FoobarScript로 명명된 스크립트를 게임오브젝트에 추가한다
