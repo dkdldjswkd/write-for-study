@@ -10,10 +10,10 @@ ex ) myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(_characterRotation
 ex ) RigidBody.velocity = new Vector3 (0,10,0);
 
 //피직스, 레이져
-IsGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f); // 어디서, 방향, 길이 or 어디서, 방향, RaycastHit, 길이
+bool IsGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f); // 어디서, 방향, 길이 or 어디서, 방향,out RaycastHit, 길이
 Ray ray =  Camera.main.ScreenPointToRay(Input.mousePosition); // 메인카메라에서 스크린으로 쏘는 레이저, 마우스 포지션 좌표에
 RaycastHit // 광선을 쏴서 그 정보를 얻어올때 쓰는 자료형
-Plane.Raycast(Ray _r, out float _f) // 특정 평면과 Ray와의 충돌을 체크하여  Ray의 Origin으로부터 충돌지점까지의 거리를 _f에 저장하여 줍니다.
+Plane.Raycast(Ray _r, out float _f) // 특정 평면과 Ray와의 충돌을 체크하여  Ray의 Origin으로부터 충돌지점까지의 거리를 _f에 저장하여 줍니다, return bool
 Vector3 point = ray.GetPoint(rayDistance); // ray의 rayDistance 거리에 충돌한 위치값을 반환함
 ray.origin // ray의 시작부분
 Debug.DrawLine(ray.origin, point, Color.red); // 시작부분, 끝부분, 색 으로 선을 그려줌
@@ -45,6 +45,10 @@ gameobject.SetActive(false); // gameobject를 비활성화 시킴, (true는 활�
 GameObject emptyGameObject = new GameObject("name"); //name이라는 빈 게임 오브젝트를 생성
 Instantiate(GameObject original ,Vector3 position ,Quaternion rotation); // 게임오브젝트 복제?
 
+//게임 오브젝트 찾기
+GameObject.FindGameObjectWithTag("Player"); // 파라메터의 태그를 가진 게임오브젝트를 return 함
+GameObject.Find("이름"); // 게임오브젝트의 이름을 찾아 return함
+
 //게임 오브젝트 제거
 Destroy(GameObject obj ,float time); // time 만큼 지연 후 삭제 (필수 파라메터 x)
 
@@ -64,6 +68,16 @@ gameObject.AddComponent .AddComponent<스크립트이름>();
 
 //monobehaviour 내장 함수
 FixedUpdate(); // 모든 물리적 단계 호출, 물리 객체 조정과 같은 정기적 업데이트에 사용(RigidBody)
+
+//Time 클래스
+Time.time; // 유니티 시작 후 현재까지 흐른 시간을 return
+Time.deltatime; // 다음프레임으로 초기화 되기까지의 시간을 return
+
+//네비게이션 (Nav)
+window - AI - Navigation // 으로 킴
+NavMeshAgent // 컴포넌트, 목표를 향해 움직일때 서로를 피해가는 캐릭터 생성에 사용한다.
+NavMeshAgent.SetDestination(Vector3 target); // 목적지 설정, 연산이 많이 들어가므로 매 프레임 호출하기에는 무리가 있음 즉, 코루틴 함수로 이용하길바람.
+
 --------------------------URL-------------------------------
 //유니티 애니메이션
 https://blog.naver.com/gold_metal/220490285634
