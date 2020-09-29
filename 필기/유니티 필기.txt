@@ -3,15 +3,19 @@ transform.position = new Vector3 (10, 0, 0);
 RigidBody.position
 
 // 이동 출발과 끝 지점을 직선으로 연결한 경로를 매우 빠르게 이동한다
-// 중간에 다른 rigidbody가 있을 시 밀어내는 등의 물리처리를 한다
+(중간에 다른 rigidbody가 있을 시 밀어내는 등의 물리처리를 한다)
 RigidBody.MovePosition()
 ex ) myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
 ex ) myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(_characterRotationY));
 ex ) RigidBody.velocity = new Vector3 (0,10,0);
 
+// 위치 이동 메소드
+transform.Translate(Vector3.right * Time.deltaTime); // 현재 게임오브젝트의 위치를 기준으로 상대적인 Vector3의 방향으로 이동한다.
+
 //피직스, 레이져
 IsGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f); // 어디서, 방향, 길이 or 어디서, 방향, RaycastHit, 길이
 Ray ray =  Camera.main.ScreenPointToRay(Input.mousePosition); // 메인카메라에서 스크린으로 쏘는 레이저, 마우스 포지션 좌표에
+Ray ray = new Ray(transform.position, transform.forward); // ~에서, ~방향으로
 RaycastHit // 광선을 쏴서 그 정보를 얻어올때 쓰는 자료형
 Plane.Raycast(Ray _r, out float _f) // 특정 평면과 Ray와의 충돌을 체크하여  Ray의 Origin으로부터 충돌지점까지의 거리를 _f에 저장하여 줍니다.
 Vector3 point = ray.GetPoint(rayDistance); // ray의 rayDistance 거리에 충돌한 위치값을 반환함
@@ -43,7 +47,7 @@ gameobject.SetActive(false); // gameobject를 비활성화 시킴, (true는 활�
 
 //게임 오브젝트 생성
 GameObject emptyGameObject = new GameObject("name"); //name이라는 빈 게임 오브젝트를 생성
-Instantiate(GameObject original ,Vector3 position ,Quaternion rotation); // 게임오브젝트 복제?
+A a = Instantiate(GameObject original ,Vector3 position ,Quaternion rotation) as A; // A의 인스턴스를 동적할당;
 
 //게임 오브젝트 제거
 Destroy(GameObject obj ,float time); // time 만큼 지연 후 삭제 (필수 파라메터 x)
