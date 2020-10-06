@@ -1,6 +1,8 @@
 // 순간이동식으로 위치를 이동시킴
 transform.position = new Vector3 (10, 0, 0);
 RigidBody.position
+Vector3.Lerp(Vector3 start, Vector3 fin, float percent); // percent가 0 = 0%, 1 = 100% 의 벡터값을 반환함, ex) percent가 0.5라면 start와 fin의 중간 벡터값을 반환함
+y = 4(-(x^2)+x) // (0,0) -> (0.5,1) -> (1,0) 을 지나는 2차함수
 
 // 이동 출발과 끝 지점을 직선으로 연결한 경로를 매우 빠르게 이동한다
 // 중간에 다른 rigidbody가 있을 시 밀어내는 등의 물리처리를 한다
@@ -17,6 +19,7 @@ Plane.Raycast(Ray _r, out float _f) // 특정 평면과 Ray와의 충돌을 체�
 Vector3 point = ray.GetPoint(rayDistance); // ray의 rayDistance 거리에 충돌한 위치값을 반환함
 ray.origin // ray의 시작부분
 Debug.DrawLine(ray.origin, point, Color.red); // 시작부분, 끝부분, 색 으로 선을 그려줌
+Collider[] colls = Physics.OverlapSphere(transform.position, 0.1f); // transform의 위치 중심 0.1f 거리 내에 있는 오브젝트들의 collider가 배열 형태로 colls에 저장된다.
 
 //스크립트에서 애니메이션 파라미터 관리
 currentGun.anim.SetBool("Walk", true);
@@ -95,3 +98,5 @@ https://onecoke.tistory.com/entry/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EC%BD%94%EB%A3%A8
 // 유니티 코딩 스킬
 스크립트마다 static bool 변수로 스크립트를 활성화, 비활성화 시킬 수 있음
 --------------------------정리 전 ----------------------------
+float distance = Vector3.Distance(GameObject cube1, GameObject cube2); // 게임 오브젝트 간 거리를 구한다 (처리비용이 비싸다)
+Vector3.sqrMagnitude; // Vector3의 제곱값을 반환한다 단순 거리 비교용으로 많이 사용한다 (처리비용이 싸다)
