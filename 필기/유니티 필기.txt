@@ -55,6 +55,9 @@ A a = Instantiate(GameObject original ,Vector3 position ,Quaternion rotation) as
 //게임 오브젝트 찾기
 GameObject.FindGameObjectWithTag("Player"); // 파라메터의 태그를 가진 게임오브젝트를 return 함
 GameObject.Find("이름"); // 게임오브젝트의 이름을 찾아 return함
+// + 응용, 게임오브젝트 찾아서 스크립트 사용하기
+SpawnerButton a = GameObject.Find("SpawnerButton_0").GetComponent<SpawnerButton>();
+a.Sample();    
 
 //게임 오브젝트 제거
 Destroy(GameObject obj ,float time); // time 만큼 지연 후 삭제 (필수 파라메터 x)
