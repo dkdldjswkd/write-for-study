@@ -14,6 +14,23 @@ ex ) RigidBody.velocity = new Vector3 (0,10,0);
 // 위치 이동 메소드
 transform.Translate(Vector3.right * Time.deltaTime); // 현재 게임오브젝트의 위치를 기준으로 상대적인 Vector3의 방향으로 이동한다.
 
+//게임 오브젝트 이동
+Input.GetAxis(string name)
+-1.0f 부터 1.0f 까지의 범위의 값을 반환한다. 즉, 부드러운 이동이 필요한 경우에 사용된다.
+Input.GetAxisRaw(string name)
+-1, 0, 1 세 가지 값 중 하나가 반환된다. 키보드 값을 눌렀을 때 즉시 반응해야한다면 GetAxisRaw를 사용하면 된다
+
+//충돌 체크
+void OnTriggerEnter(Collider other) { // gameObject의 Trigger와 충돌한 객체의 콜라이더를 other라는 매개변수로 받아옴
+	if (other.gameObject.CompareTag ("Pick Up")) {
+			other.gameObject.SetActive (false);
+			count = count + 1;         
+	}
+}
+void OnTriggerEnter(Collider other) // Trigger에 들어갔을 때
+void OnTriggerStay(Collider other) // Trigger안에 있을때 
+void OnTriggerExit(Collider other) // Trigger를 벗어 날때
+
 //피직스, 레이져
 bool IsGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f); // 어디서, 방향, 길이 or 어디서, 방향,out RaycastHit, 길이
 Ray ray =  Camera.main.ScreenPointToRay(Input.mousePosition); // 메인카메라에서 스크린으로 쏘는 레이저, 마우스 포지션 좌표에
@@ -31,12 +48,6 @@ currentGun.anim.SetBool("Walk", true);
 //유니티 씬 로드 하기
 using UnityEngine.SceneManagement; // 인클루드
 SceneManager.LoadScene(sceneName); // 씬 로드해옴
-
-//게임 오브젝트 이동
-Input.GetAxis(string name)
--1.0f 부터 1.0f 까지의 범위의 값을 반환한다. 즉, 부드러운 이동이 필요한 경우에 사용된다.
-Input.GetAxisRaw(string name)
--1, 0, 1 세 가지 값 중 하나가 반환된다. 키보드 값을 눌렀을 때 즉시 반응해야한다면 GetAxisRaw를 사용하면 된다
 
 //게임 오브젝트 회전
 myRigid.MoveRotation( transform.rotation *  Quaternion.Euler( rotationY ) ); // 매개변수 값은 쿼터니언임.
