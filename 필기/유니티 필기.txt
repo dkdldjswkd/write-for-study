@@ -34,6 +34,7 @@ void OnTriggerExit(Collider other) // Trigger를 벗어 날때
 //피직스, 레이져
 bool IsGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f); // 어디서, 방향, 길이 or 어디서, 방향,out RaycastHit, 길이
 Ray ray =  Camera.main.ScreenPointToRay(Input.mousePosition); // 메인카메라에서 스크린으로 쏘는 레이저, 마우스 포지션 좌표에
+Physics.Raycast(ray, out hit) // Ray 객체의 Origin에서 direction으로 Ray를 쏘고 충돌여부를 반환함, 또한 충돌객체의 정보를 hit에 저장함
 Ray ray = new Ray(transform.position, transform.forward); // ~에서, ~방향으로
 RaycastHit // 광선을 쏴서 그 정보를 얻어올때 쓰는 자료형
 Plane.Raycast(Ray _r, out float _f) // 특정 평면과 Ray와의 충돌을 체크하여  Ray의 Origin으로부터 충돌지점까지의 거리를 _f에 저장하여 줍니다, return bool
