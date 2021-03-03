@@ -1,8 +1,9 @@
-// 순간이동식으로 위치를 이동시킴
-transform.position = new Vector3 (10, 0, 0);
-RigidBody.position
-Vector3.Lerp(Vector3 start, Vector3 fin, float percent); // percent가 0 = 0%, 1 = 100% 의 벡터값을 반환함, ex) percent가 0.5라면 start와 fin의 중간 벡터값을 반환함
-y = 4(-(x^2)+x) // (0,0) -> (0.5,1) -> (1,0) 을 지나는 2차함수
+//게임 오브젝트 회전
+myRigid.MoveRotation( transform.rotation *  Quaternion.Euler( rotationY ) ); // 매개변수 값은 쿼터니언임.
+transform.rotation // 이것또한 쿼터니언
+transform.LookAt(Vector3); // Vector3 좌표로 오브젝트를 바라보게함
+//게임 오브젝트 addForce, 점프할때 쓰임
+rigidbody.AddForce(Vector3.up * power, ForceMode.Impulse); // (벡터, 포스모드)
 
 // 이동 출발과 끝 지점을 직선으로 연결한 경로를 매우 빠르게 이동한다
 (중간에 다른 rigidbody가 있을 시 밀어내는 등의 물리처리를 한다)
@@ -10,6 +11,12 @@ RigidBody.MovePosition()
 ex ) myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
 ex ) myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(_characterRotationY));
 ex ) RigidBody.velocity = new Vector3 (0,10,0);
+
+// 순간이동식으로 위치를 이동시킴
+transform.position = new Vector3 (10, 0, 0);
+RigidBody.position
+Vector3.Lerp(Vector3 start, Vector3 fin, float percent); // percent가 0 = 0%, 1 = 100% 의 벡터값을 반환함, ex) percent가 0.5라면 start와 fin의 중간 벡터값을 반환함
+y = 4(-(x^2)+x) // (0,0) -> (0.5,1) -> (1,0) 을 지나는 2차함수
 
 // 위치 이동 메소드
 transform.Translate(Vector3.right * Time.deltaTime); // 현재 게임오브젝트의 위치를 기준으로 상대적인 Vector3의 방향으로 이동한다.
@@ -49,13 +56,6 @@ currentGun.anim.SetBool("Walk", true);
 //유니티 씬 로드 하기
 using UnityEngine.SceneManagement; // 인클루드
 SceneManager.LoadScene(sceneName); // 씬 로드해옴
-
-//게임 오브젝트 회전
-myRigid.MoveRotation( transform.rotation *  Quaternion.Euler( rotationY ) ); // 매개변수 값은 쿼터니언임.
-transform.rotation // 이것또한 쿼터니언
-transform.LookAt(Vector3); // Vector3 좌표로 오브젝트를 바라보게함
-//게임 오브젝트 addForce, 점프할때 쓰임
-rigidbody.AddForce(Vector3.up * power, ForceMode.Impulse); // (벡터, 포스모드)
 
 //게임 오브젝트 활성화, 비활성화
 gameobject.SetActive(false); // gameobject를 비활성화 시킴, (true는 활성화)
