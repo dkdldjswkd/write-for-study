@@ -1,0 +1,14 @@
+---------------------------함수 포인터 -----------------------------
+// 반환값, 매개변수가 있는 함수 포인터
+https://dojang.io/mod/page/view.php?id=593
+//함수포인터 응용
+https://hwan-shell.tistory.com/87
+
+---------------------------- 매크로 ---------------------------------
+//매크로, 매크로 함수 (#, ## 등의 연산자 사용법)
+https://iamaman.tistory.com/699
+// typedef로 PFI라는 함수포인터의 형선언
+typedef int (*PFI)(char *, char *); // 위의 문은 int를 반환하는 2개의 char * 인수의 함수에 대한 포인터를 위한 동의어로 PFI를 만든다.
+
+//__stdcll, __cdecl 등의 한정자에 관하여
+https://m.blog.naver.com/tipsware/221331043657
